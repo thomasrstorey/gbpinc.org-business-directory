@@ -1,0 +1,8 @@
+{% macro category_link(category) %}
+<li><a href="#{{ category|uriencode }}">{{ category }}</a></li>
+{%- endmacro %}
+
+
+{% macro category_header(category) %}
+<h2 id="{{ category|uriencode }}">{{ category }}</h2>
+{%- endmacro %}

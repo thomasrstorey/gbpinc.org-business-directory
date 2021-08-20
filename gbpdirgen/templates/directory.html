@@ -1,0 +1,125 @@
+{% import 'listings.html' as listings %}
+{% import 'categories.html' as category_macros %}
+
+<style>
+  .wrapper {
+    margin-top: 14px;
+    display: grid;
+    grid-gap: 14px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .premiumCard {
+    position: relative;
+    border: 1px solid #d0d0d0;
+    transform-x: 0;
+    background-color: #fff;
+    transition: transform 0.5s, box-shadow 0.5s;
+    cursor: pointer;
+    padding: 10px;
+  }
+  .premiumCard:hover {
+    transform: translate(0px, -4px) scale(1.001);
+    box-shadow: -2px 3px 5px 0px #a0a0a0;
+  }
+  .premiumDesc {
+    font-size: 14px !important;
+    line-height: 20px !important;
+    display: block;
+  }
+  .premiumPromo {
+    height: 258px;
+    background-color: #ddd;
+    line-height: 258px;
+    text-align: center;
+    border: 1px dashed #d0d0d0;
+    transition: background-color 0.5s, color 0.5s;
+  }
+  .premiumPromo:hover {
+    background-color: #eee;
+  }
+  .premiumPromo > a {
+    color: #848484;
+  }
+  .cardImg {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: auto;
+    height: 140px;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .categoriesLinks {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 120px;
+    list-style: none;
+  }
+  .categories {
+    list-style: none;
+    margin: 10px 0px;
+  }
+  .categories > li {
+    display: inline;
+    background-color: #777;
+    color: #eee;
+    margin: 6px 12px;
+    padding: 4px 6px;
+    border-radius: 30px;
+    font-family: 'Raleway', sans-serif;
+    margin: 0px 3px;
+    font-size: 10px;
+  }
+  .categories > li:first-child {
+    margin-left: 0px;
+    margin-right: 3px;
+  }
+  .basicListing {
+    width: 100%;
+    display: block;
+    position: relative;
+  }
+  .basicListing > a {
+    font-size: 24px;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+  .basicDesc {
+    line-height: 22px !important;
+    font-size: 18px !important;
+    display: block;
+  }
+</style>
+<h3>Business Spotlight</h3>
+<section class="wrapper">
+  {% for listing in premium_listings %}
+    {{ listings.premium(listing) }}
+  {% endfor %}
+  {% for listing in enhanced_listings %}
+    {{ listings.enhanced(listing) }}
+  {% endfor %}
+  <a href="https://form.jotform.com/200727580141145">
+    <div class="premiumPromo">
+      List Your Business Today!
+    </div>
+  </a>
+</section>
+<hr style="margin: 10px 0px"></hr>
+<section>
+  <h3>Directory</h3>
+  <ul class="categoriesLinks">
+    {% for category in categories %}
+     {{ category_macros.category_link(category) }}
+    {% endfor %}
+  </ul>
+</section>
+
+{% for category in categories %}
+  {{ category_macros.category_header(category) }}
+  {% for listing in basic_listings %}
+    {% if category in listing.categories %}
+      {{ listings.basic(listing) }}
+    {% endif %}
+  {% endfor %}
+{% endfor %}

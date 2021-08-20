@@ -1,0 +1,95 @@
+{% macro premium(listing) %}
+  <div class="premiumCard">
+    <a href="{{ listing.website_url }}" target="_blank" rel="noreferrer">
+      <div class="cardImg" style="background-image: url('{{ listing.logo_url }}');"></div>
+      <label>{{ listing.business_name }}</label>
+      <p>
+        <span class="premiumDesc">
+          {{ listing.contact_name }}
+          <br/>
+          {% if listing.phone %}
+            {{ listing.phone }}
+            <br/>
+          {% elif listing.email %}
+            {{ listing.email }}
+            <br/>
+          {% endif %}
+          {% for address_line in listing.address %}
+            {% if address_line %}
+              {{ address_line }}
+              <br/>
+            {% endif %}
+          {% endfor %}
+          {{ listing.city }}, {{ listing.state }}&nbsp;{{ listing.zip_code }} 
+        </span>
+      </p>
+      <ul class="categories">
+        {% for category in listing.categories %}
+        <li>
+          {{ category }}
+        </li>
+        {% endfor %}
+      </ul>
+    </a>
+  </div>
+{%- endmacro %}
+
+{% macro enhanced(listing) %}
+  <div class="premiumCard">
+    <div class="cardImg" style="background-image: url('{{ listing.logo_url }}');"></div>
+    <label>{{ listing.business_name }}</label>
+    <p>
+      <span class="premiumDesc">
+        {{ listing.contact_name }}
+        <br/>
+        {% if listing.phone %}
+          {{ listing.phone }}
+          <br/>
+        {% elif listing.email %}
+          {{ listing.email }}
+          <br/>
+        {% endif %}
+        {% for address_line in listing.address %}
+          {% if address_line %}
+            {{ address_line }}
+            <br/>
+          {% endif %}
+        {% endfor %}
+        {{ listing.city }}, {{ listing.state }}&nbsp;{{ listing.zip_code }} 
+      </span>
+    </p>
+    <ul class="categories">
+      {% for category in listing.categories %}
+      <li>
+        {{ category }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{%- endmacro %}
+
+{% macro basic(listing) %}
+  <section class="basicListing">
+    <h4>{{ listing.business_name }}</h4>
+    <p>
+      <span class="basicDesc">
+        {{ listing.contact_name }}
+        <br/>
+        {% if listing.phone %}
+          {{ listing.phone }}
+          <br/>
+        {% elif listing.email %}
+          {{ listing.email }}
+          <br/>
+        {% endif %}
+        {% for address_line in listing.address %}
+          {% if address_line %}
+            {{ address_line }}
+            <br/>
+          {% endif %}
+        {% endfor %}
+        {{ listing.city }}, {{ listing.state }}&nbsp;{{ listing.zip_code }} 
+      </span>
+    </p>
+  </section>
+{%- endmacro %}
